@@ -1,0 +1,28 @@
+// Define your SharePoint site URL, list name, and other necessary parameters
+const siteUrl = 'https://cpsinet.sharepoint.com/sites/EXT-DreamFactory-SouthAlabama-USASpring2024Re-Zero';
+const listName = 'Test';
+
+// Define the item you want to add to the list
+const newItem = {
+    '__metadata': { 'type': `SP.Data.${listName}ListItem` }, // Adjust the type according to your list name
+    'Title': 'Test Item',
+    'Description': 'Test Item Description'
+};
+
+// Add item to SharePoint list
+async function addItem() {
+    const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/items`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json;odata=verbose',
+            'Content-Type': 'application/json;odata=verbose',
+            // Include authentication headers if needed
+        },
+        body: JSON.stringify(newItem)
+    });
+    const data = await response.json();
+    console.log(data); // Process the response data as needed
+}
+
+// Call the function to add the item
+addItem();
