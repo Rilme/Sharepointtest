@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SharePoint List Item Adder</title>
+    <title>Add Item to SharePoint List</title>
 </head>
 <body>
     <h1>Add Item to SharePoint List</h1>
@@ -16,24 +16,28 @@
 
         // Define the item you want to add to the list
         const newItem = {
-            '__metadata': { 'type': `SP.Data.${listName}ListItem` }, // Adjust the type according to your list name
+            '__metadata': { 'type': `SP.Data.${listName}ListItem` },
             'Title': 'Test Item',
             'Description': 'Test Item Description'
         };
 
         // Add item to SharePoint list
         async function addItem() {
-            const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/AllItems`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json;odata=verbose',
-                    'Content-Type': 'application/json;odata=verbose',
-                    // Include authentication headers if needed
-                },
-                body: JSON.stringify(newItem)
-            });
-            const data = await response.json();
-            console.log(data); // Process the response data as needed
+            try {
+                const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/items`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json;odata=verbose',
+                        'Content-Type': 'application/json;odata=verbose',
+                        // Include authentication headers if needed
+                    },
+                    body: JSON.stringify(newItem)
+                });
+                const data = await response.json();
+                console.log('Item added successfully:', data);
+            } catch (error) {
+                console.error('Error adding item:', error);
+            }
         }
     </script>
 </body>
