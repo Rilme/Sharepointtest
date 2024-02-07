@@ -23,7 +23,7 @@
 
         // Add item to SharePoint list
         async function addItem() {
-            const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/items`, {
+            const response = await fetch(`${siteUrl}/_api/web/lists/getbytitle('${listName}')/AllItems`, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json;odata=verbose',
