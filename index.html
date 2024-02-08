@@ -1,9 +1,10 @@
 <script>
-document.getElementById('myForm').addEventListener('submit', function(event)
+document.getElementById('myForm').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent default form submission
   
   // Construct form data
-  const formData = new FormData(this);
-  const data = {
+  var formData = new FormData(this);
+  var data = {
     "firstName": formData.get('firstName'),
     "lastName": formData.get('lastName')
   };
