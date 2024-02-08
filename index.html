@@ -9,10 +9,18 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
   
   // Construct form data
   const formData = new FormData(this);
-  const fullName = formData.get('fullName');
+  const fullName = formData.get('fullName').trim(); // Trim to remove leading/trailing whitespace
   
   // Split full name into first name and last name
-  const [firstName, lastName] = fullName.split(' ');
+  const spaceIndex = fullName.indexOf(' ');
+  let firstName, lastName;
+  if (spaceIndex !== -1) {
+    firstName = fullName.substring(0, spaceIndex);
+    lastName = fullName.substring(spaceIndex + 1);
+  } else {
+    firstName = fullName;
+    lastName = '';
+  }
   
   // Construct data object to send to Power Automate
   const data = {
