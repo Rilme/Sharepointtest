@@ -1,6 +1,5 @@
 <form id="myForm">
-  <input type="text" placeholder="First Name">
-  <input type="text" placeholder="Last Name">
+  <input type="text" name="fullName" placeholder="Full Name">
   <button type="submit">Submit</button>
 </form>
 
@@ -10,10 +9,16 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
   
   // Construct form data
   const formData = new FormData(this);
-  const data = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
+  const fullName = formData.get('fullName');
+  
+  // Split full name into first name and last name
+  const [firstName, lastName] = fullName.split(' ');
+  
+  // Construct data object to send to Power Automate
+  const data = {
+    "firstName": firstName,
+    "lastName": lastName
+  };
 
   // Send form data to Power Automate
   fetch('https://prod-191.westus.logic.azure.com:443/workflows/c2537bf7bc454b2ea998dd4f214b6300/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hDud5itQ7lVz9MKy8KvOhENDrZkLwIxjkwIriEWSKpk', {
