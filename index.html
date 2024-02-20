@@ -7,10 +7,8 @@
 </head>
 <body>
     <h1>Upload Image</h1>
-    <form action="https://prod-142.westus.logic.azure.com:443/workflows/401339b5340a494fac226bbd924754d1/triggers/manual/paths/invoke" method="post" enctype="multipart/form-data">
+    <form action="https://prod-142.westus.logic.azure.com:443/workflows/401339b5340a494fac226bbd924754d1/triggers/manual/paths/invoke?api-version=2016-06-01" method="post" enctype="multipart/form-data">
         <input type="file" name="image" accept="image/jpeg">
-        <!-- Add a hidden input field for api-version -->
-        <input type="hidden" name="api-version" value="2016-06-01">
         <input type="hidden" name="sp" value="%2Ftriggers%2Fmanual%2Frun">
         <input type="hidden" name="sv" value="1.0">
         <input type="hidden" name="sig" value="6j38ms7V6TawqKMXxiy4V-GYg4biLI6KmLk2qL9Bbx8">
