@@ -12,22 +12,15 @@
     <h1>Data Validation Page</h1>
 
     <div id="dataContainer"></div>
-    
-    <button onclick="goToIndexPage()">Go to Index Page</button>
 
     <script>
-        // Function to navigate to the index page
-        function goToIndexPage() {
-            window.location.href = 'index.html'; // Change 'index.html' to the path of your index page
-        }
-
         // Function to fetch data from SharePoint list
         function fetchSharePointData() {
             // Make a GET request to SharePoint API to fetch data
-            fetch('https://prod-92.westus.logic.azure.com:443/workflows/b8aed472476d4e30a762027d45f29a3f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RvJN_krp58oEEFEz6KX-ye_0Yu-9v3hGlbN9JMQuMC4'(\'Test\')/firstName', {
+            fetch('https://prod-92.westus.logic.azure.com:443/workflows/b8aed472476d4e30a762027d45f29a3f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RvJN_krp58oEEFEz6KX-ye_0Yu-9v3hGlbN9JMQuMC4', {
                 headers: {
-                    'Accept': 'application/json;odata=verbose',
-                    'Content-Type': 'application/json;odata=verbose'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             })
             .then(response => response.json())
@@ -45,14 +38,14 @@
             dataContainer.innerHTML = '';
 
             // Check if there are any items in the retrieved data
-            if (data && data.d && data.d.results && data.d.results.length > 0) {
+            if (data && data.length > 0) {
                 // Iterate through the retrieved items and display them
-                data.d.results.forEach(item => {
+                data.forEach(item => {
                     // Example: Display item properties in a list
                     const listItem = document.createElement('div');
                     listItem.innerHTML = `
-                        <h3>${item.Title}</h3>
-                        <p>Description: ${item.Description}</p>
+                        <h3>${item.firstName}</h3>
+                        <p>Last Name: ${item.lastName}</p>
                         <!-- Add more properties as needed -->
                     `;
                     dataContainer.appendChild(listItem);
