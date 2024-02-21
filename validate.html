@@ -12,8 +12,15 @@
     <h1>Data Validation Page</h1>
 
     <div id="dataContainer"></div>
+    
+    <button onclick="goToIndexPage()">Go to Index Page</button>
 
     <script>
+        // Function to navigate to the index page
+        function goToIndexPage() {
+            window.location.href = 'index.html'; // Change 'index.html' to the path of your index page
+        }
+
         // Function to fetch data from SharePoint list
         function fetchSharePointData() {
             // Make a GET request to SharePoint API to fetch data
@@ -54,10 +61,6 @@
                 // If no data is found, display a message
                 dataContainer.textContent = 'No data found.';
             }
-        }
-
-        function goToIndex() {
-            window.location.href = 'index.html'; // Redirect to validate.html
         }
 
         // Call the function to fetch data when the page loads
