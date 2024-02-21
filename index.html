@@ -9,6 +9,7 @@
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" name="image" id="imageInput">
         <button type="button" onclick="uploadImage()">Upload Image</button>
+        <button type="button" onclick="goToValidatePage()">Go to Validate Page</button>
     </form>
     <script>
         function uploadImage() {
@@ -31,6 +32,10 @@
                 console.error('Error:', error);
                 alert('An error occurred while uploading image.');
             });
+        }
+
+        function goToValidatePage() {
+            window.location.href = 'validate.html'; // Redirect to validate.html
         }
     </script>
 </body>
