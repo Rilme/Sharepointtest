@@ -17,7 +17,7 @@
         // Function to fetch data from SharePoint list
         function fetchSharePointData() {
             // Make a GET request to SharePoint API to fetch data
-            fetch('https://your-sharepoint-site/_api/web/lists/getbytitle(\'YourListName\')/items', {
+            fetch('https://prod-92.westus.logic.azure.com:443/workflows/b8aed472476d4e30a762027d45f29a3f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RvJN_krp58oEEFEz6KX-ye_0Yu-9v3hGlbN9JMQuMC4(\'Test\')/firstName', {
                 headers: {
                     'Accept': 'application/json;odata=verbose',
                     'Content-Type': 'application/json;odata=verbose'
