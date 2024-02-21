@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Validation Page</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Data Validation Page</h1>
+
+    <div id="dataContainer"></div>
+
+    <script>
+        // Function to fetch data from SharePoint list
+        function fetchSharePointData() {
+            // Make a GET request to SharePoint API to fetch data
+            fetch('https://your-sharepoint-site/_api/web/lists/getbytitle(\'YourListName\')/items', {
+                headers: {
+                    'Accept': 'application/json;odata=verbose',
+                    'Content-Type': 'application/json;odata=verbose'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved data
+                displayData(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Function to display data on the webpage
+        function displayData(data) {
+            const dataContainer = document.getElementById('dataContainer');
+            // Clear existing content
+            dataContainer.innerHTML = '';
+
+            // Check if there are any items in the retrieved data
+            if (data && data.d && data.d.results && data.d.results.length > 0) {
+                // Iterate through the retrieved items and display them
+                data.d.results.forEach(item => {
+                    // Example: Display item properties in a list
+                    const listItem = document.createElement('div');
+                    listItem.innerHTML = `
+                        <h3>${item.Title}</h3>
+                        <p>Description: ${item.Description}</p>
+                        <!-- Add more properties as needed -->
+                    `;
+                    dataContainer.appendChild(listItem);
+                });
+            } else {
+                // If no data is found, display a message
+                dataContainer.textContent = 'No data found.';
+            }
+        }
+
+        // Call the function to fetch data when the page loads
+        fetchSharePointData();
+    </script>
+</body>
+</html>
