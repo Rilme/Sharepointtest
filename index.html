@@ -14,15 +14,15 @@
     function uploadImage() {
       const input = document.getElementById('imageInput');
       const file = input.files[0];
-
+      
       if (!file) {
         alert('Please select an image file.');
         return;
       }
-
+      
       const formData = new FormData();
       formData.append('image', file);
-
+      
       fetch('https://prod-65.westus.logic.azure.com:443/workflows/b7df1994b38f4229b1df92120f84cdd4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cvP9wgINTwRqCMGx0kGKIlW8ONlqFeEf1bVigz6uol4', {
         method: 'POST',
         body: formData
@@ -31,10 +31,16 @@
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.json();
+        // Check if response is empty
+        if (response.status === 204) {
+          return; // No content, return nothing
+        }
+        return response.json(); // Parse JSON response
       })
       .then(data => {
-        console.log(data); // Handle response from the API
+        if (data) {
+          console.log(data); // Handle response from the API
+        }
         alert('Image uploaded successfully!');
       })
       .catch(error => {
