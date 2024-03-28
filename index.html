@@ -23,7 +23,7 @@
       const formData = new FormData();
       formData.append('image', file);
       
-      fetch('https://prod-140.westus.logic.azure.com:443/workflows/ec30638adcf84564af17336453fb159c/triggers/manual/paths/invoke?api-version=2016-06-01', {
+      fetch('https://prod-65.westus.logic.azure.com:443/workflows/b7df1994b38f4229b1df92120f84cdd4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=cvP9wgINTwRqCMGx0kGKIlW8ONlqFeEf1bVigz6uol4', {
         method: 'POST',
         body: formData
       })
