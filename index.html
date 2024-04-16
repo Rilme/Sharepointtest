@@ -39,7 +39,7 @@
         
         // Send the request
         fetch('https://prod-82.westus.logic.azure.com:443/workflows/da58a7d3240d4482b244bd16c4757a62/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=VtInV2QY6fGo7IxgqIaTZecRrI3hBwN4rmqNZP5w1h4', {
-          method: 'PUT',
+          method: 'POST',
           body: formData
         })
         .then(response => {
