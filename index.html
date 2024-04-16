@@ -20,9 +20,12 @@
         return;
       }
       
-      // Create FormData object and append the file
+      // Convert the file to a Blob object
+      const blob = new Blob([file], { type: file.type });
+      
+      // Create FormData object and append the Blob
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('image', blob);
       
       // Send the request
       fetch('https://prod-179.westus.logic.azure.com:443/workflows/e0fe3655b90b4cb480161411e70ed5b4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PtOXynWz1HD8mSDaebhy9KmAkeDyIRVJJ1TShFTy9bQ', {
@@ -51,4 +54,3 @@
     }
   </script>
 </body>
-</html>
