@@ -20,41 +20,34 @@
         return;
       }
       
-      // Convert the image to base64
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = function () {
-        const base64Image = reader.result.split(',')[1]; // Extracting base64 part
-        
-        // Create FormData object with base64 image
-        const formData = new FormData();
-        formData.append('image', base64Image);
-        
-        // Send the request
-        fetch('https://prod-179.westus.logic.azure.com:443/workflows/e0fe3655b90b4cb480161411e70ed5b4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PtOXynWz1HD8mSDaebhy9KmAkeDyIRVJJ1TShFTy9bQ', {
-          method: 'PUT',
-          body: formData
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          // Check if response is empty
-          if (response.status === 204) {
-            return; // No content, return nothing
-          }
-          return response.json(); // Parse JSON response
-        })
-        .then(data => {
-          if (data) {
-            console.log(data); // Handle response from the API
-          }
-          alert('Image uploaded successfully!');
-        })
-        .catch(error => {
-          alert('There was a problem with the upload. Please try again later.');
-        });
-      };
+      // Create FormData object and append the file
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      // Send the request
+      fetch('https://prod-179.westus.logic.azure.com:443/workflows/e0fe3655b90b4cb480161411e70ed5b4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PtOXynWz1HD8mSDaebhy9KmAkeDyIRVJJ1TShFTy9bQ', {
+        method: 'PUT',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Check if response is empty
+        if (response.status === 204) {
+          return; // No content, return nothing
+        }
+        return response.json(); // Parse JSON response
+      })
+      .then(data => {
+        if (data) {
+          console.log(data); // Handle response from the API
+        }
+        alert('Image uploaded successfully!');
+      })
+      .catch(error => {
+        alert('There was a problem with the upload. Please try again later.');
+      });
     }
   </script>
 </body>
