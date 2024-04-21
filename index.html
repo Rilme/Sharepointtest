@@ -1,3 +1,8 @@
+
+To avoid errors when sending the request, we need to ensure that the request format and data are correct, and that the endpoint URL is valid. Here's your code with some modifications:
+
+html
+Copy code
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,12 +27,16 @@
       
       // Create FormData object and append the file
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('file', file);
       
       // Send the request
-      fetch('https://prod-179.westus.logic.azure.com:443/workflows/e0fe3655b90b4cb480161411e70ed5b4/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=PtOXynWz1HD8mSDaebhy9KmAkeDyIRVJJ1TShFTy9bQ', {
-        method: 'PUT',
-        body: formData
+      fetch('https://your-form-recognizer-endpoint-url', {
+        method: 'POST', // Use POST method
+        body: formData,
+        headers: {
+          // Set Content-Type header to multipart/form-data
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then(response => {
         if (!response.ok) {
@@ -47,6 +56,7 @@
       })
       .catch(error => {
         alert('There was a problem with the upload. Please try again later.');
+        console.error(error); // Log the error for debugging
       });
     }
   </script>
