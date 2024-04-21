@@ -1,8 +1,3 @@
-
-To avoid errors when sending the request, we need to ensure that the request format and data are correct, and that the endpoint URL is valid. Here's your code with some modifications:
-
-html
-Copy code
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +26,7 @@ Copy code
       
       // Send the request
       fetch('https://your-form-recognizer-endpoint-url', {
-        method: 'POST', // Use POST method
+        method: 'POST', // Change method to POST
         body: formData,
         headers: {
           // Set Content-Type header to multipart/form-data
