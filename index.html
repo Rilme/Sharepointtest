@@ -4,18 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Image Upload</title>
-<style>
-  .hidden-button {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-</style>
 </head>
 <body>
   <h1>Upload Image</h1>
   <input type="file" id="imageInput" accept="image/*">
-  <button class="hidden-button" onclick="uploadImage()">Upload</button>
+  <button onclick="uploadImage()">Upload</button>
 
   <script>
     function uploadImage() {
